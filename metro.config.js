@@ -1,10 +1,18 @@
-// Learn more https://docs.expo.io/guides/customizing-metro
-const { getDefaultConfig } = require('expo/metro-config');
+// metro.config.js
+const { getDefaultConfig } = require('@expo/metro-config');
 
-/** @type {import('expo/metro-config').MetroConfig} */
-const config = getDefaultConfig(__dirname, {
-  // [Web-only]: Enables CSS support in Metro.
-  isCSSEnabled: true,
-});
+module.exports = async (defaultConfig) => {
+  const config = await getDefaultConfig(__dirname);
 
-module.exports = config;
+  return {
+    ...config,
+    transformer: {
+      ...config.transformer,
+      babelTransformerPath: require.resolve('react-native-sass-transformer'),
+    },
+    resolver: {
+      ...config.resolver,
+      sourceExts: [...config.resolver.sourceExts, 'scss', 'sass'],
+    },
+  };
+};
