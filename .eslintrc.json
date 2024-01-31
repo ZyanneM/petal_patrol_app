@@ -1,22 +1,33 @@
 {
     "env": {
-        "browser": true,
-        "es2021": true
+      "browser": true,
+      "es2021": true
     },
     "extends": [
-        "eslint:recommended",
-        "plugin:@typescript-eslint/recommended",
-        "plugin:react/recommended"
+      "eslint:recommended",
+      "plugin:@typescript-eslint/recommended",
+      "plugin:react/recommended"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
-        "ecmaVersion": "latest",
-        "sourceType": "module"
+      "ecmaVersion": 2021, // Mise à jour de la version ECMAScript
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "jsx": true // Active la prise en charge JSX
+      }
     },
     "plugins": [
-        "@typescript-eslint",
-        "react"
+      "@typescript-eslint",
+      "react"
     ],
     "rules": {
+      "react/react-in-jsx-scope": "off", // Désactive cette règle pour permettre JSX sans import de React
+      "@typescript-eslint/explicit-module-boundary-types": "off" // Désactive cette règle si elle interfère avec les composants React
+      // Ajoutez d'autres règles spécifiques à votre projet au besoin
+    },
+    "settings": {
+      "react": {
+        "version": "detect" // Détection automatique de la version de React
+      }
     }
-}
+  }
